@@ -1,7 +1,7 @@
 import Knex from  'knex';
 
 export async function up(knex: Knex){
-    knex.schema.createTable('points', table => {
+    return knex.schema.createTable('points', table => {
         table.increments('id').primary();
         table.string('image').notNullable();
         table.string('name').notNullable();
@@ -10,10 +10,11 @@ export async function up(knex: Knex){
         table.decimal('latitude').notNullable();
         table.decimal('longitude').notNullable();
         table.string('city').notNullable();
-        table.string('uf').notNullable();
-    })
+        table.string('uf',2).notNullable();
+    });
 }
 
-export async function down(){
-// VOLTAR ATRAS
+export async function down(Knex: Knex){
+    // VOLTAR ATRAS
+    return Knex.schema.dropTable('points');
 }
